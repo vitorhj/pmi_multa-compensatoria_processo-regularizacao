@@ -10,7 +10,7 @@
 
 <form id="myForm">
 <table>
-<tr><th colspan=2><b><font size="5">Dados do Imóvel:</b></font></th></tr>
+<tr><th colspan=2><b><font size="5">1) Dados do Imóvel:</b></font></th></tr>
 <tr>
 <td>Fator de Correção quanto a Localização (FL):</td>
 <td>
@@ -1650,7 +1650,7 @@
 <i>UFM = Unidade Fiscal Municipal = R$219,75 (Decreto XXX/2023).</i><BR>
 </table>
 
-<table><tr><th colspan=2><br><b><font size="5">Irregularidades:</b></font></th></tr>
+<table><tr><th colspan=2><br><b><font size="5">2) Irregularidades:</b></font></th></tr>
 <tr><td>Área construída em pavimentos excedentes: (%i = 40%)</td><td><input type=text size=15 name="inf_pav" id="inf_pav">m²</td></tr>
 <tr><td>Área construída que extrapola o Índice de Aproveitamento: (%i = 10%)</td><td><input type=text size=15 name="inf_ia" id="inf_ia">m²</td></tr>
 <tr><td>Área construída sobre recuo frontal: (%i = 20%)</td><td><input type=text size=15 name="inf_rf" id="inf_rf">m²</td></tr>
@@ -1668,18 +1668,48 @@
 </table>
 
 <table>
-<b><font size="5">Memorial de Cálculo:</b></font>
+<b><font size="5">3) Memorial de Cálculo:</b></font>
 </table>
 
 
-<table><td>1) CÁLCULO DA BASE DA MULTA COMPENSATÓRIA (BMC), EXPRESSO EM R$/m²:</td></table>
+<table><td>CÁLCULO DA BASE DA MULTA COMPENSATÓRIA (BMC), EXPRESSO EM R$/m²:</td></table>
 <table><td>BMC = VMQ x FT x FV x FS x FA x FI x FU x FL</td></table>
 <table>
 
-<BR>
+<td>BMC =</td>
+<td id="value_vmq"></td>
+<td>x</td>
+<td id="value_ft"></td>
+<td>x</td>
+<td>1.00</td>
+<td>x</td>
+<td id="value_fs"></td>
+<td>x</td>
+<td id="value_fa"></td>
+<td>x</td>
+<td id="value_fi"></td>
+<td>x</td>
+<td id="value_fu"></td>
+<td>x</td>
+<td id="value_fl"></td>
+<td>219.75 = </td>
+<td id="valor_base"></td> 
+</table>
 
-<table><tr><td>2) CÁLCULO DO VALOR DA MULTA COMPENSATÓRIA (VMC), EXPRESSO EM R$:</td><td></table>
+<BR>
+<table><tr><td>CÁLCULO DO VALOR DA MULTA COMPENSATÓRIA (VMC), EXPRESSO EM R$:</td><td></table>
 <table><tr><td>VMC = BMC x SOMATÓRIO (Ai x %i)</td><td></table>
+
+<table>
+<td>VMC =</td>
+<td>BMC</td> 
+<td>x</td>
+<td id="somatorio"></td>
+</table>
+
+<table>
+<td><tr>O resultado do somatório condiz com a soma de todas as áreas do item 02 multiplicado pelo respectivo fator de correção %i.</td>
+</table>
 
 <table>
 <BR><BR>
@@ -1762,8 +1792,32 @@ function mostrarvalor() {
   var inf_to = input.value;
   multa = multa + (valor_base * inf_to * 0.15);
 
+  somatorio = multa/valor_base
+
+  document.getElementById('valor_base').innerHTML = valor_base;
+  document.getElementById('somatorio').innerHTML = somatorio;
+
+
   imprimir_multa = document.getElementById("result");
   imprimir_multa.innerHTML = multa.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  
+  document.getElementById('value_vmq').innerHTML = value_vmq;
+  document.getElementById('value_ft').innerHTML = value_ft;
+  document.getElementById('value_fs').innerHTML = value_fs;
+  document.getElementById('value_fa').innerHTML = value_fa;
+  document.getElementById('value_fi').innerHTML = value_fi;
+  document.getElementById('value_fu').innerHTML = value_fu;
+  document.getElementById('fator_faixa').innerHTML = fator_faixa;
+
+  document.getElementById('inf_pav').innerHTML = inf_pav;
+  document.getElementById('inf_ia').innerHTML = inf_ia;
+  document.getElementById('inf_rf').innerHTML = inf_rf;
+  document.getElementById('inf_rl').innerHTML = inf_rl;
+  document.getElementById('inf_vf').innerHTML = inf_vf;
+  document.getElementById('inf_ap').innerHTML = inf_ap;
+  document.getElementById('inf_al').innerHTML = inf_al;
+  document.getElementById('inf_to').innerHTML = inf_to;
+  
 
 
  
